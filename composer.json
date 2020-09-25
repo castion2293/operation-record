@@ -21,7 +21,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Pharaoh\\OperationRecord\\": "src/"
+      "Pharaoh\\OperationRecord\\": "src/",
+      "Database\\Factories\\Pharaoh\\OperationRecord\\Models\\": "database/factories/"
     }
   },
   "extra": {
@@ -35,6 +36,7 @@
     }
   },
   "require-dev": {
-    "orchestra/testbench": "^6.1"
+    "orchestra/testbench": "^6.1",
+    "laravel/legacy-factories": "^1.0.4"
   }
 }

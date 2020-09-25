@@ -68,7 +68,7 @@ class BaseTestCase extends TestCase
      */
     protected function getApplicationTimezone($app)
     {
-        return 'UTC';
+        return env('APP_TIMEZONE');
     }
 
     /**
@@ -113,6 +113,38 @@ class BaseTestCase extends TestCase
      */
     protected function getEnvironmentSetUp($app)
     {
+        // 擴充一個測試專用的 "testing" 連線設定
+        // 並將測試的連線切至 "testing"
+        $app['config']->set('database.connections.testing', [
+            'driver' => env('TEST_DB_DRIVER', 'mysql'),
+            'read' => [
+                'host' => env('TEST_DB_HOST_READ', 'localhost'),
+            ],
+            'write' => [
+                'host' => env('TEST_DB_HOST_WRITE', 'localhost'),
+            ],
+            'host' => env('TEST_DB_HOST', 'localhost'),
+            'database' => env('TEST_DB_DATABASE', 'operation'),
+            'port' => env('TEST_DB_PORT', 3306),
+            'username' => env('TEST_DB_USERNAME', 'root'),
+            'password' => env('TEST_DB_PASSWORD', 'root'),
+            'prefix' => env('TEST_DB_PREFIX'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'strict' => true,
+            'engine' => null,
+            'modes' => [
+                //'ONLY_FULL_GROUP_BY', // Disable this to allow grouping by one column
+                'STRICT_TRANS_TABLES',
+                'NO_ZERO_IN_DATE',
+                'NO_ZERO_DATE',
+                'ERROR_FOR_DIVISION_BY_ZERO',
+                'NO_AUTO_CREATE_USER',
+                'NO_ENGINE_SUBSTITUTION'
+            ],
+        ]);
+
+        $app['config']->set('database.default', 'testing');
     }
 
     /**
