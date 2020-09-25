@@ -1,0 +1,40 @@
+{
+  "name": "pharaoh/operation-record",
+  "description": "操作記錄-收集器",
+  "type": "library",
+  "authors": [
+    {
+      "name": "nick",
+      "email": "nick@ifalo.com.tw"
+    }
+  ],
+  "require": {
+    "php": ">=7.3",
+    "ext-json": "*",
+    "illuminate/support": "^8.6",
+    "guzzlehttp/guzzle": "^7.1"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Pharaoh\\OperationRecord\\Tests\\": "tests/"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Pharaoh\\OperationRecord\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Pharaoh\\OperationRecord\\OperationRecordProvider"
+      ],
+      "aliases": {
+        "OperationRecord": "Pharaoh\\OperationRecord\\Facades\\OperationRecord"
+      }
+    }
+  },
+  "require-dev": {
+    "orchestra/testbench": "^6.1"
+  }
+}

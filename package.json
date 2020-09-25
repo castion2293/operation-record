@@ -1,0 +1,23 @@
+{
+  "name": "operation-record",
+  "version": "1.0.32",
+  "description": "操作記錄-收集器",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "release": "standard-version"
+  },
+  "author": "nick",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^4.3.0",
+    "standard-version": "^9.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "php-cs-fixer fix . && git add ."
+    }
+  }
+}
