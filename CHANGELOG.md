@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.5](https://github.com/castion2293/operation-record/compare/v1.1.4...v1.1.5) (2020-09-26)
+
+
+### Bug Fixes
+
+* composer name change to thoth-pharaoh([@nick](https://github.com/nick)) ([80d54be](https://github.com/castion2293/operation-record/commit/80d54bece4fe7a87153cd7771416530d99d9669f))
+
 ### [1.1.4](///compare/v1.1.3...v1.1.4) (2020-09-26)
 
 
