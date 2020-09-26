@@ -1,5 +1,5 @@
 {
-  "name": "pharaoh/operation-record",
+  "name": "thoth-pharaoh/operation-record",
   "description": "操作記錄-收集器",
   "type": "library",
   "authors": [
