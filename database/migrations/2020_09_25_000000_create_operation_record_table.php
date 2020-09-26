@@ -15,7 +15,7 @@ class CreateOperationRecordTable extends Migration
     public function up()
     {
         Schema::create('operation_records', function (Blueprint $table) {
-            $table->primary('id');
+            $table->id()->from(1000000);
             $table->unsignedInteger('operator_id')->default(0)->comment('操作者ID');
             $table->unsignedSmallInteger('func_key')->default(0)->comment('功能Key');
             $table->unsignedBigInteger('subject_id')->default(0)->comment('功能ID');
@@ -35,7 +35,7 @@ class CreateOperationRecordTable extends Migration
                 ->comment('最後更新');
 
             $table->index(['operator_id', 'created_at', 'func_key', ], 'idx_operation_records_1');
-            $table->index(['func_id', 'created_at', 'func_key'], 'idx_operation_records_2');
+            $table->index(['subject_id', 'created_at', 'func_key'], 'idx_operation_records_2');
         });
 
         DB::statement("ALTER TABLE operation_records COMMENT '控端 - 操作日誌'");
