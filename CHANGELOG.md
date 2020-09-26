@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.4](///compare/v1.1.3...v1.1.4) (2020-09-26)
+
+
+### Bug Fixes
+
+* 增加尋找紀錄方法([@nick](undefined/nick)) dad0997
+
 ### [1.1.3](///compare/v1.1.2...v1.1.3) (2020-09-26)
 
 
