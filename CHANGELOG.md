@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.6](https://github.com/castion2293/operation-record/compare/v1.1.5...v1.1.6) (2020-09-26)
+
+
+### Bug Fixes
+
+* composer.json add license([@nick](https://github.com/nick)) ([61928a9](https://github.com/castion2293/operation-record/commit/61928a9ba7a7bf6f767c2713aa308440e6d8a8cd))
+
 ### [1.1.5](https://github.com/castion2293/operation-record/compare/v1.1.4...v1.1.5) (2020-09-26)
 
 
