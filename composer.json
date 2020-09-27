@@ -2,7 +2,7 @@
   "name": "thoth-pharaoh/operation-record",
   "description": "操作記錄-收集器",
   "type": "library",
-  "license": "MIT",g
+  "license": "MIT",
   "authors": [
     {
       "name": "nick",
