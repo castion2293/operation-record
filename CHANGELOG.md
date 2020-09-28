@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.12](https://github.com/castion2293/operation-record/compare/v1.1.11...v1.1.12) (2020-09-28)
+
+
+### Bug Fixes
+
+* 修改readMe([@nick](https://github.com/nick)) ([ce67b2c](https://github.com/castion2293/operation-record/commit/ce67b2c6e525c10e2020f1360acf7d0a24351810))
+
 ### [1.1.11](https://github.com/castion2293/operation-record/compare/v1.1.10...v1.1.11) (2020-09-28)
 
 
