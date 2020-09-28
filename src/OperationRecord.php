@@ -3,6 +3,7 @@
 namespace Pharaoh\OperationRecord;
 
 use Illuminate\Support\Arr;
+use Pharaoh\OperationRecord\Jobs\OperationRecordCreateJob;
 use Pharaoh\OperationRecord\Services\OperationRecordService;
 
 class OperationRecord
@@ -49,6 +50,45 @@ class OperationRecord
                 'ip' => $ip
             ]
         );
+    }
+
+    /**
+     * 建立一筆 操作記錄 使用 queue job 的方式
+     *
+     * @param int $operatorId
+     * @param int $subjectId
+     * @param int $funcKey
+     * @param int $status
+     * @param string $type
+     * @param string $targets
+     * @param string $content
+     * @param string $ip
+     * @return array
+     */
+    public function dispatch(
+        int $operatorId,
+        int $subjectId,
+        int $funcKey,
+        int $status,
+        string $type,
+        string $targets,
+        string $content,
+        string $ip = ''
+    ) {
+        dispatch(
+            new OperationRecordCreateJob(
+                [
+                    'operator_id' => $operatorId,
+                    'subject_id' => $subjectId,
+                    'func_key' => $funcKey,
+                    'status' => $status,
+                    'type' => $type,
+                    'targets' => $targets,
+                    'content' => $content,
+                    'ip' => $ip
+                ]
+            )
+        )->onQueue(config('operation_record.queue'));
     }
 
     /**

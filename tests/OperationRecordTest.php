@@ -3,9 +3,10 @@
 namespace Pharaoh\OperationRecord\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Queue;
 use Pharaoh\OperationRecord\Facades\OperationRecord;
+use Pharaoh\OperationRecord\Jobs\OperationRecordCreateJob;
 use Pharaoh\OperationRecord\Models\OperationRecord as OperationRecordModel;
 
 class OperationRecordTest extends BaseTestCase
@@ -55,6 +56,33 @@ class OperationRecordTest extends BaseTestCase
                 'ip' => $ip
             ]
         );
+    }
+
+    /**
+     * 測試 建立一筆 操作記錄 使用 queue job 的方式
+     */
+    public function testDispatch()
+    {
+        // Arrange
+        $operatorId = 1;
+        $subjectId = 2;
+        $funcKey = 1104;
+        $status = 1;
+        $type = 'admin';
+        $targets = '修改目標';
+        $content = '修改內容';
+        $ip = '127.0.0.1';
+
+        Queue::fake();
+
+        // Act
+        OperationRecord::dispatch($operatorId, $subjectId, $funcKey, $status, $type, $targets, $content, $ip);
+
+        // Assert
+        Queue::assertPushed(function (OperationRecordCreateJob $job) use ($operatorId) {
+            return Arr::get($job->params, 'operator_id') === $operatorId;
+        });
+        Queue::assertPushed(OperationRecordCreateJob::class, 1);
     }
 
     /**

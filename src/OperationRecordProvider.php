@@ -14,10 +14,22 @@ class OperationRecordProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__ . '/../database/migrations'
-                => database_path('migrations'),
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
             ],
             'database'
+        );
+
+        // 合併套件設定檔
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/operation_record.php',
+            'operation_record'
+        );
+
+        $this->publishes(
+            [
+                __DIR__ . '/../config' => config_path(),
+            ],
+            'config'
         );
     }
 
