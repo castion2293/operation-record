@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.14](https://github.com/castion2293/operation-record/compare/v1.1.13...v1.1.14) (2020-09-28)
+
+
+### Bug Fixes
+
+* 增加queue create record文件說明([@nick](https://github.com/nick)) ([9cce387](https://github.com/castion2293/operation-record/commit/9cce38715eb6aeba8af41aed5c132502b55e4d65))
+
 ### [1.1.13](https://github.com/castion2293/operation-record/compare/v1.1.12...v1.1.13) (2020-09-28)
 
 
