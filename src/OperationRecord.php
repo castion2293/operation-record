@@ -61,7 +61,6 @@ class OperationRecord
     {
         // 預設條件
         $attributes = [
-            'type' => 'admin',
             'timeBetween' => [
                 'beginAt' => now()->startOfDay()->toDateTimeString(),
                 'endAt' => now()->endOfDay()->toDateTimeString()

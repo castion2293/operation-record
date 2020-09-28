@@ -5,6 +5,7 @@ namespace Pharaoh\OperationRecord\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Builder;
 
 class OperationRecord extends Model
 {
@@ -19,7 +20,7 @@ class OperationRecord extends Model
      * @param array $attributes
      * @return mixed
      */
-    public function scopeOperatorId($query, array $attributes)
+    public function scopeOperatorId(Builder $query, array $attributes)
     {
         $operatorId = Arr::get($attributes, 'operatorId');
 
@@ -35,7 +36,7 @@ class OperationRecord extends Model
      * @param array $attributes
      * @return mixed
      */
-    public function scopeSubjectId($query, array $attributes)
+    public function scopeSubjectId(Builder $query, array $attributes)
     {
         $subjectId = Arr::get($attributes, 'subjectId');
 
@@ -51,7 +52,7 @@ class OperationRecord extends Model
      * @param array $attributes
      * @return mixed
      */
-    public function scopeFuncKey($query, array $attributes)
+    public function scopeFuncKey(Builder $query, array $attributes)
     {
         $funcKey = Arr::get($attributes, 'funcKey');
 
@@ -67,7 +68,7 @@ class OperationRecord extends Model
      * @param array $attributes
      * @return mixed
      */
-    public function scopeType($query, array $attributes)
+    public function scopeType(Builder $query, array $attributes)
     {
         $type = Arr::get($attributes, 'type');
 
@@ -83,7 +84,7 @@ class OperationRecord extends Model
      * @param array $attributes
      * @return mixed
      */
-    public function scopeStatus($query, array $attributes)
+    public function scopeStatus(Builder $query, array $attributes)
     {
         $status = Arr::get($attributes, 'status');
 
@@ -99,7 +100,7 @@ class OperationRecord extends Model
      * @param array $attributes
      * @return mixed
      */
-    public function scopeTimeBetween($query, array $attributes)
+    public function scopeTimeBetween(Builder $query, array $attributes)
     {
         $beginAt = Arr::get($attributes, 'timeBetween.beginAt');
         $endAt = Arr::get($attributes, 'timeBetween.endAt');
@@ -114,7 +115,7 @@ class OperationRecord extends Model
      * @param array $attributes
      * @return mixed
      */
-    public function scopeTimeSort($query, array $attributes)
+    public function scopeTimeSort(Builder $query, array $attributes)
     {
         $sort = Arr::get($attributes, 'timeSort');
 

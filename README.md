@@ -13,6 +13,11 @@ php artisan vendor:publish --tag=database --force
 
 ## 使用方法
 
+先引入門面
+```
+use Pharaoh\OperationRecord\Facades\OperationRecord;
+```
+
 - 建立一筆 操作記錄
 ```bash
 OperationRecord::create($operatorId, $subjectId, $funcKey, $status, $type, $targets, $content, $ip);
@@ -40,18 +45,18 @@ OperationRecord::find($params);
 ```
 $params 內容可以自定義選則搭配，可選項目如下:
 
-| 參數 | 欄位 | 說明 | 
-| ------------|:----------------------- |:----------------------- 
-| operator_id | 操作者 ID | 一筆使用 int (ex: 1) 多筆使用 array (ex: [1, 2, 3]) |
-| subject_id | 操作對象 ID | 一筆使用 int (ex: 4) 多筆使用 array (ex: [4, 5, 6]) |
-| func_key | 功能 KEY | 一筆使用 int (ex: 1001) 多筆使用 array (ex: [1001, 1002, 1003]) |
-| status | 狀態 | 一筆使用 int (ex: 1) 多筆使用 array (ex: [1, 2, 3]) |
-| type | 操作類型 | 一筆使用 string (ex: 'admin') 多筆使用 array (ex: ['admin', 'agent']) |
-| begin_at | 開始時間 | datatime '2020-09-27 00:00:00' |
-| end_at | 結束時間 | datatime '2020-09-27 23:59:59' |
-| sort | 時間排序 | string 正序 'asc' 倒序 'desc'|
-| page | 第幾頁 | int 1|
-| per_page | 每頁幾筆 | int 10|
+| 參數 | 欄位 | 說明 | 預設 |
+| ------------|:----------------------- |:----------------------- |:-----------------------
+| operator_id | 操作者 ID | 一筆使用 int (ex: 1) 多筆使用 array (ex: [1, 2, 3]) | |
+| subject_id | 操作對象 ID | 一筆使用 int (ex: 4) 多筆使用 array (ex: [4, 5, 6]) | |
+| func_key | 功能 KEY | 一筆使用 int (ex: 1001) 多筆使用 array (ex: [1001, 1002, 1003]) | |
+| status | 狀態 | 一筆使用 int (ex: 1) 多筆使用 array (ex: [1, 2, 3]) | | 
+| type | 操作類型 | 一筆使用 string (ex: 'admin') 多筆使用 array (ex: ['admin', 'agent']) | |
+| begin_at | 開始時間 | datatime '2020-09-27 00:00:00' | 當日 00:00:00 |
+| end_at | 結束時間 | datatime '2020-09-27 23:59:59' | 當日 23:59:59 |
+| sort | 時間排序 | string 正序 'asc' 倒序 'desc'| 'desc' |
+| page | 第幾頁 | int 1| 1 |
+| per_page | 每頁幾筆 | int 10| 10 |
 
 - 移除 $datetime 前的 操作記錄
 ```bash
