@@ -11,6 +11,14 @@ class OperationRecordProvider extends ServiceProvider
     {
         // 合併套件migration
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        $this->publishes(
+            [
+                __DIR__ . '/../database/migrations'
+                => database_path('migrations'),
+            ],
+            'database'
+        );
     }
 
     public function register()
