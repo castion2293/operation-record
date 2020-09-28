@@ -16,7 +16,7 @@ class OperationRecordProvider extends ServiceProvider
             [
                 __DIR__ . '/../database/migrations' => database_path('migrations'),
             ],
-            'database'
+            'operation-record-database'
         );
 
         // 合併套件設定檔
@@ -29,7 +29,7 @@ class OperationRecordProvider extends ServiceProvider
             [
                 __DIR__ . '/../config' => config_path(),
             ],
-            'config'
+            'operation-record-config'
         );
     }
 

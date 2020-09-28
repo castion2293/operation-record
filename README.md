@@ -8,7 +8,12 @@ composer require thoth-pharaoh/operation-record
 
 匯出 Migration
 ```bash
-php artisan vendor:publish --tag=database --force
+php artisan vendor:publish --tag=operation-record-database --force
+```
+
+匯出 Config
+```bash
+php artisan vendor:publish --tag=operation-record-config --force
 ```
 
 ## 使用方法
@@ -32,6 +37,11 @@ OperationRecord::create($operatorId, $subjectId, $funcKey, $status, $type, $targ
 | $targets | string | 操作對象 | Gabriella Rohan |
 | $content | text | 操作內容 | Sed est ipsum earum est sapiente debitis. |
 | $ip | string | 操作者 IP | 127.0.0.1 |
+
+- 建立一筆 操作記錄(使用 queue job 的方式)
+```bash
+OperationRecord::dispatch($operatorId, $subjectId, $funcKey, $status, $type, $targets, $content, $ip);
+```
 
 - 搜尋操作紀錄
 ```bash
