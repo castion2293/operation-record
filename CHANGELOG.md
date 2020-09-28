@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.9](https://github.com/castion2293/operation-record/compare/v1.1.8...v1.1.9) (2020-09-28)
+
+
+### Bug Fixes
+
+* 增加移除操作紀錄方法([@nick](https://github.com/nick)) ([d919520](https://github.com/castion2293/operation-record/commit/d919520845cd88697e7f2b94c591ef0b77332abc))
+
 ### [1.1.8](https://github.com/castion2293/operation-record/compare/v1.1.7...v1.1.8) (2020-09-27)
 
 
