@@ -11,9 +11,6 @@ class OperationRecordProvider extends ServiceProvider
     {
         // 合併套件migration
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        // 合併套件設定檔
-        $this->mergeConfigFrom(__DIR__ . '/../config/errorCode.php', 'error_code');
     }
 
     public function register()

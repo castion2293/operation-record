@@ -15,7 +15,6 @@ class OperationRecordTest extends BaseTestCase
     public function setUp(): void
     {
         parent::setUp();
-//        $operationRecord = OperationRecordModel::factory()->create();
     }
 
     /**
@@ -111,13 +110,57 @@ class OperationRecordTest extends BaseTestCase
      */
     public function testRemoveBefore()
     {
+        // Arrange
+        OperationRecordModel::factory()->create();
+
+        OperationRecordModel::factory()->count(20)->create(
+            [
+                'created_at' => now()->subMonths(4)->toDateTimeString(),
+                'updated_at' => now()->subMonths(4)->toDateTimeString()
+            ]
+        );
+
+        $dataTime = now()->subMonths(3)->toDateTimeString();
+
+        // Act
+        $result = OperationRecord::removeBefore($dataTime);
+
+        // Assert
+        $code = Arr::get($result, 'code');
+        $data = Arr::get($result, 'data');
+
+        $this->assertEquals('200', $code);
+        $this->assertTrue($data);
+        $this->assertDatabaseCount('operation_records', 1);
     }
 
     /**
-     * 移除 $date 後的 操作記
+     * 移除 $date 後的 操作記錄
      */
     public function testRemoveAfter()
     {
+        // Arrange
+        OperationRecordModel::factory()->count(20)->create();
+
+        OperationRecordModel::factory()->create(
+            [
+                'created_at' => now()->subMonths(4)->toDateTimeString(),
+                'updated_at' => now()->subMonths(4)->toDateTimeString()
+            ]
+        );
+
+        $dataTime = now()->subMonths(3)->toDateTimeString();
+
+        // Act
+        $result = OperationRecord::removeAfter($dataTime);
+
+        // Assert
+        $code = Arr::get($result, 'code');
+        $data = Arr::get($result, 'data');
+
+        $this->assertEquals('200', $code);
+        $this->assertTrue($data);
+        $this->assertDatabaseCount('operation_records', 1);
     }
 
     /**
@@ -125,5 +168,18 @@ class OperationRecordTest extends BaseTestCase
      */
     public function testTruncate()
     {
+        // Arrange
+        OperationRecordModel::factory()->count(20)->create();
+
+        // Act
+        $result = OperationRecord::truncate();
+
+        // Assert
+        $code = Arr::get($result, 'code');
+        $data = Arr::get($result, 'data');
+
+        $this->assertEquals('200', $code);
+        $this->assertTrue($data);
+        $this->assertDatabaseCount('operation_records', 0);
     }
 }

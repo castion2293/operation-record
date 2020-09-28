@@ -60,7 +60,7 @@ class OperationRecordService
     public function find(array $attributes = []): array
     {
         try {
-            $operationRecordBuilder = $this->operationRecord;
+            $operationRecordBuilder = $this->operationRecord->query();
 
             foreach ($attributes as $function => $attribute) {
                 $functionName = Str::of($function)->studly()->prepend('scope');
@@ -100,6 +100,74 @@ class OperationRecordService
             return [
                 'code' => self::SUCCESS,
                 'data' => $data
+            ];
+        } catch (\Exception $exception) {
+            return [
+                'code' => self::FAILURE,
+                'error' => $exception->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * 移除 $date 前的 操作記錄
+     *
+     * @param string $dateTime
+     * @return array
+     */
+    public function removeBefore(string $dateTime): array
+    {
+        try {
+            $this->operationRecord->where('created_at', '<', $dateTime)->delete();
+
+            return [
+                'code' => self::SUCCESS,
+                'data' => true
+            ];
+        } catch (\Exception $exception) {
+            return [
+                'code' => self::FAILURE,
+                'error' => $exception->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * 移除 $date 後的 操作記錄
+     *
+     * @param string $dateTime
+     * @return array
+     */
+    public function removeAfter(string $dateTime): array
+    {
+        try {
+            $this->operationRecord->where('created_at', '>', $dateTime)->delete();
+
+            return [
+                'code' => self::SUCCESS,
+                'data' => true
+            ];
+        } catch (\Exception $exception) {
+            return [
+                'code' => self::FAILURE,
+                'error' => $exception->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * 清空操作記錄
+     *
+     * @return array
+     */
+    public function truncate(): array
+    {
+        try {
+            $this->operationRecord->truncate();
+
+            return [
+                'code' => self::SUCCESS,
+                'data' => true
             ];
         } catch (\Exception $exception) {
             return [

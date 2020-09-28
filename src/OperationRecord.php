@@ -111,28 +111,31 @@ class OperationRecord
      * 移除 $date 前的 操作記錄
      *
      * @param string $dataTime
-     * @return bool
+     * @return array
      */
-    public function removeBefore(string $dataTime): bool
+    public function removeBefore(string $dataTime): array
     {
+        return $this->operationRecordService->removeBefore($dataTime);
     }
 
     /**
      * 移除 $date 後的 操作記錄
      *
      * @param string $dataTime
-     * @return bool
+     * @return array
      */
-    public function removeAfter(string $dataTime): bool
+    public function removeAfter(string $dataTime): array
     {
+        return $this->operationRecordService->removeAfter($dataTime);
     }
 
     /**
      * 清空操作記錄
      *
-     * @return bool
+     * @return array
      */
-    public function truncate(): bool
+    public function truncate(): array
     {
+        return $this->operationRecordService->truncate();
     }
 }
