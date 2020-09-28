@@ -23,7 +23,9 @@ class OperationRecord extends Model
     {
         $operatorId = Arr::get($attributes, 'operatorId');
 
-        return $query->where('operator_id', $operatorId);
+        $operate = (is_array($operatorId)) ? 'whereIn' : 'where';
+
+        return $query->$operate('operator_id', $operatorId);
     }
 
     /**
@@ -37,7 +39,9 @@ class OperationRecord extends Model
     {
         $subjectId = Arr::get($attributes, 'subjectId');
 
-        return $query->where('subject_id', $subjectId);
+        $operate = (is_array($subjectId)) ? 'whereIn' : 'where';
+
+        return $query->$operate('subject_id', $subjectId);
     }
 
     /**
@@ -51,7 +55,9 @@ class OperationRecord extends Model
     {
         $funcKey = Arr::get($attributes, 'funcKey');
 
-        return $query->where('func_key', $funcKey);
+        $operate = (is_array($funcKey)) ? 'whereIn' : 'where';
+
+        return $query->$operate('func_key', $funcKey);
     }
 
     /**
@@ -65,7 +71,9 @@ class OperationRecord extends Model
     {
         $type = Arr::get($attributes, 'type');
 
-        return $query->where('type', $type);
+        $operate = (is_array($type)) ? 'whereIn' : 'where';
+
+        return $query->$operate('type', $type);
     }
 
     /**
@@ -79,7 +87,9 @@ class OperationRecord extends Model
     {
         $status = Arr::get($attributes, 'status');
 
-        return $query->where('status', $status);
+        $operate = (is_array($status)) ? 'whereIn' : 'where';
+
+        return $query->$operate('status', $status);
     }
 
     /**

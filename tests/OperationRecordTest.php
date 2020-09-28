@@ -77,18 +77,18 @@ class OperationRecordTest extends BaseTestCase
             ]
         );
 
-//        $params = [
-//            'operator_id' => $operatorId,
-//            'func_key' => $funcKey,
-//            'status' => $status,
-//            'type' => $type,
-//            'begin_at' => now()->startOfDay()->toDateTimeString(),
-//            'end_at' => now()->endOfDay()->toDateTimeString(),
-//            'sort' => 'desc',
-//            'page' => 1,
-//            'per_page' => 10
-//        ];
-        $params = [];
+        $params = [
+            'operator_id' => [$operatorId, 2],
+            'func_key' => [$funcKey, '1111'],
+            'status' => [$status, 2],
+            'type' => [$type, 'agent'],
+            'begin_at' => now()->startOfDay()->toDateTimeString(),
+            'end_at' => now()->endOfDay()->toDateTimeString(),
+            'sort' => 'desc',
+            'page' => 1,
+            'per_page' => 10
+        ];
+//        $params = [];
 
         // Act
         $result = OperationRecord::find($params);
