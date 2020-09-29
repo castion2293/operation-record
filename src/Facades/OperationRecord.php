@@ -4,6 +4,11 @@ namespace Pharaoh\OperationRecord\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * Class OperationRecord
+ *
+ * @see \Pharaoh\OperationRecord\OperationRecord
+ */
 class OperationRecord extends Facade
 {
     /**

@@ -4,13 +4,11 @@ namespace Pharaoh\OperationRecord\Services;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Pharaoh\OperationRecord\Exceptions\OperationRecordException;
 use Pharaoh\OperationRecord\Models\OperationRecord;
 
 class OperationRecordService
 {
-    const SUCCESS = '200';
-    const FAILURE = '500';
-
     protected $operationRecord;
 
     public function __construct(OperationRecord $operationRecord)
@@ -22,22 +20,17 @@ class OperationRecordService
      * 建立 操作紀錄資料
      *
      * @param array $params
-     * @return array
+     * @return bool
+     * @throws OperationRecordException
      */
-    public function create(array $params = []): array
+    public function create(array $params = []): bool
     {
         try {
             $this->operationRecord->create($params);
 
-            return [
-                'code' => self::SUCCESS,
-                'data' => true
-            ];
+            return true;
         } catch (\Exception $exception) {
-            return [
-                'code' => self::FAILURE,
-                'error' => $exception->getMessage(),
-            ];
+            throw new OperationRecordException($exception);
         }
     }
 
@@ -98,14 +91,10 @@ class OperationRecordService
             ];
 
             return [
-                'code' => self::SUCCESS,
                 'data' => $data
             ];
         } catch (\Exception $exception) {
-            return [
-                'code' => self::FAILURE,
-                'error' => $exception->getMessage(),
-            ];
+            throw new OperationRecordException($exception);
         }
     }
 
@@ -113,22 +102,17 @@ class OperationRecordService
      * 移除 $date 前的 操作記錄
      *
      * @param string $dateTime
-     * @return array
+     * @return bool
+     * @throws OperationRecordException
      */
-    public function removeBefore(string $dateTime): array
+    public function removeBefore(string $dateTime): bool
     {
         try {
             $this->operationRecord->where('created_at', '<', $dateTime)->delete();
 
-            return [
-                'code' => self::SUCCESS,
-                'data' => true
-            ];
+            return true;
         } catch (\Exception $exception) {
-            return [
-                'code' => self::FAILURE,
-                'error' => $exception->getMessage(),
-            ];
+            throw new OperationRecordException($exception);
         }
     }
 
@@ -136,44 +120,33 @@ class OperationRecordService
      * 移除 $date 後的 操作記錄
      *
      * @param string $dateTime
-     * @return array
+     * @return bool
      */
-    public function removeAfter(string $dateTime): array
+    public function removeAfter(string $dateTime): bool
     {
         try {
             $this->operationRecord->where('created_at', '>', $dateTime)->delete();
 
-            return [
-                'code' => self::SUCCESS,
-                'data' => true
-            ];
+            return true;
         } catch (\Exception $exception) {
-            return [
-                'code' => self::FAILURE,
-                'error' => $exception->getMessage(),
-            ];
+            throw new OperationRecordException($exception);
         }
     }
 
     /**
      * 清空操作記錄
      *
-     * @return array
+     * @return bool
+     * @throws OperationRecordException
      */
-    public function truncate(): array
+    public function truncate(): bool
     {
         try {
             $this->operationRecord->truncate();
 
-            return [
-                'code' => self::SUCCESS,
-                'data' => true
-            ];
+            return true;
         } catch (\Exception $exception) {
-            return [
-                'code' => self::FAILURE,
-                'error' => $exception->getMessage(),
-            ];
+            throw new OperationRecordException($exception);
         }
     }
 }

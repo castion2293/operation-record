@@ -26,7 +26,8 @@ class OperationRecord
      * @param string $targets
      * @param string $content
      * @param string $ip
-     * @return array
+     * @return bool
+     * @throws Exceptions\OperationRecordException
      */
     public function create(
         int $operatorId,
@@ -37,7 +38,7 @@ class OperationRecord
         string $targets,
         string $content,
         string $ip = ''
-    ): array {
+    ): bool {
         return $this->operationRecordService->create(
             [
                 'operator_id' => $operatorId,
@@ -96,6 +97,7 @@ class OperationRecord
      *
      * @param array $params
      * @return array
+     * @throws Exceptions\OperationRecordException
      */
     public function find(array $params = []): array
     {
@@ -150,9 +152,10 @@ class OperationRecord
      * 移除 $date 前的 操作記錄
      *
      * @param string $dataTime
-     * @return array
+     * @return bool
+     * @throws Exceptions\OperationRecordException
      */
-    public function removeBefore(string $dataTime): array
+    public function removeBefore(string $dataTime): bool
     {
         return $this->operationRecordService->removeBefore($dataTime);
     }
@@ -161,9 +164,10 @@ class OperationRecord
      * 移除 $date 後的 操作記錄
      *
      * @param string $dataTime
-     * @return array
+     * @return bool
+     * @throws Exceptions\OperationRecordException
      */
-    public function removeAfter(string $dataTime): array
+    public function removeAfter(string $dataTime): bool
     {
         return $this->operationRecordService->removeAfter($dataTime);
     }
@@ -171,9 +175,10 @@ class OperationRecord
     /**
      * 清空操作記錄
      *
-     * @return array
+     * @return bool
+     * @throws Exceptions\OperationRecordException
      */
-    public function truncate(): array
+    public function truncate(): bool
     {
         return $this->operationRecordService->truncate();
     }

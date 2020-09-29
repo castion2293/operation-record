@@ -37,11 +37,7 @@ class OperationRecordTest extends BaseTestCase
         $result = OperationRecord::create($operatorId, $subjectId, $funcKey, $status, $type, $targets, $content, $ip);
 
         // Assert
-        $code = Arr::get($result, 'code');
-        $data = Arr::get($result, 'data');
-
-        $this->assertEquals('200', $code);
-        $this->assertTrue($data);
+        $this->assertTrue($result);
 
         $this->assertDatabaseHas(
             'operation_records',
@@ -122,10 +118,7 @@ class OperationRecordTest extends BaseTestCase
         $result = OperationRecord::find($params);
 
         // Assert
-        $code = Arr::get($result, 'code');
         $data = Arr::get($result, 'data');
-
-        $this->assertEquals('200', $code);
         $this->assertArrayHasKey('total', $data);
         $this->assertArrayHasKey('current_page', $data);
         $this->assertArrayHasKey('last_page', $data);
@@ -154,11 +147,7 @@ class OperationRecordTest extends BaseTestCase
         $result = OperationRecord::removeBefore($dataTime);
 
         // Assert
-        $code = Arr::get($result, 'code');
-        $data = Arr::get($result, 'data');
-
-        $this->assertEquals('200', $code);
-        $this->assertTrue($data);
+        $this->assertTrue($result);
         $this->assertDatabaseCount('operation_records', 1);
     }
 
@@ -183,11 +172,7 @@ class OperationRecordTest extends BaseTestCase
         $result = OperationRecord::removeAfter($dataTime);
 
         // Assert
-        $code = Arr::get($result, 'code');
-        $data = Arr::get($result, 'data');
-
-        $this->assertEquals('200', $code);
-        $this->assertTrue($data);
+        $this->assertTrue($result);
         $this->assertDatabaseCount('operation_records', 1);
     }
 
@@ -203,11 +188,7 @@ class OperationRecordTest extends BaseTestCase
         $result = OperationRecord::truncate();
 
         // Assert
-        $code = Arr::get($result, 'code');
-        $data = Arr::get($result, 'data');
-
-        $this->assertEquals('200', $code);
-        $this->assertTrue($data);
+        $this->assertTrue($result);
         $this->assertDatabaseCount('operation_records', 0);
     }
 }
