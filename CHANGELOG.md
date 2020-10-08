@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.16](https://github.com/castion2293/operation-record/compare/v1.1.15...v1.1.16) (2020-10-08)
+
+
+### Bug Fixes
+
+* 修改使用OperationRecordScope([@nick](https://github.com/nick)) ([2520f33](https://github.com/castion2293/operation-record/commit/2520f332b924123e88898ef29f475cbfaebb6d28))
+
 ### [1.1.15](https://github.com/castion2293/operation-record/compare/v1.1.14...v1.1.15) (2020-09-29)
 
 
