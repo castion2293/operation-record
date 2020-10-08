@@ -116,6 +116,10 @@ class OperationRecord
             $attributes['operatorId'] = Arr::get($params, 'operator_id');
         }
 
+        if (array_key_exists('subject_id', $params)) {
+            $attributes['subjectId'] = Arr::get($params, 'subject_id');
+        }
+
         if (array_key_exists('func_key', $params)) {
             $attributes['funcKey'] = Arr::get($params, 'func_key');
         }

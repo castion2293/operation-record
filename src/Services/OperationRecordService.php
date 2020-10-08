@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Pharaoh\OperationRecord\Exceptions\OperationRecordException;
 use Pharaoh\OperationRecord\Models\OperationRecord;
+use Pharaoh\OperationRecord\Scopes\OperationRecordScope;
 
 class OperationRecordService
 {
@@ -49,6 +50,7 @@ class OperationRecordService
      *
      * @param array $attributes
      * @return array
+     * @throws OperationRecordException
      */
     public function find(array $attributes = []): array
     {
@@ -56,8 +58,8 @@ class OperationRecordService
             $operationRecordBuilder = $this->operationRecord->query();
 
             foreach ($attributes as $function => $attribute) {
-                $functionName = Str::of($function)->studly()->prepend('scope');
-                if (method_exists($this->operationRecord, $functionName)) {
+                $functionName = Str::of($function)->studly()->prepend('add');
+                if (method_exists(OperationRecordScope::class, $functionName)) {
                     $operationRecordBuilder = $operationRecordBuilder->$function($attributes);
                 }
             }

@@ -4,8 +4,7 @@ namespace Pharaoh\OperationRecord\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
-use Illuminate\Database\Eloquent\Builder;
+use Pharaoh\OperationRecord\Scopes\OperationRecordScope;
 
 class OperationRecord extends Model
 {
@@ -14,112 +13,13 @@ class OperationRecord extends Model
     use HasFactory;
 
     /**
-     * 篩選 操作者ID
+     * The "booted" method of the model.
      *
-     * @param $query
-     * @param array $attributes
-     * @return mixed
+     * @return void
      */
-    public function scopeOperatorId(Builder $query, array $attributes)
+    protected static function booted()
     {
-        $operatorId = Arr::get($attributes, 'operatorId');
-
-        $operate = (is_array($operatorId)) ? 'whereIn' : 'where';
-
-        return $query->$operate('operator_id', $operatorId);
-    }
-
-    /**
-     * 篩選 功能ID
-     *
-     * @param $query
-     * @param array $attributes
-     * @return mixed
-     */
-    public function scopeSubjectId(Builder $query, array $attributes)
-    {
-        $subjectId = Arr::get($attributes, 'subjectId');
-
-        $operate = (is_array($subjectId)) ? 'whereIn' : 'where';
-
-        return $query->$operate('subject_id', $subjectId);
-    }
-
-    /**
-     * 篩選 功能key
-     *
-     * @param $query
-     * @param array $attributes
-     * @return mixed
-     */
-    public function scopeFuncKey(Builder $query, array $attributes)
-    {
-        $funcKey = Arr::get($attributes, 'funcKey');
-
-        $operate = (is_array($funcKey)) ? 'whereIn' : 'where';
-
-        return $query->$operate('func_key', $funcKey);
-    }
-
-    /**
-     * 篩選 操作者類型
-     *
-     * @param $query
-     * @param array $attributes
-     * @return mixed
-     */
-    public function scopeType(Builder $query, array $attributes)
-    {
-        $type = Arr::get($attributes, 'type');
-
-        $operate = (is_array($type)) ? 'whereIn' : 'where';
-
-        return $query->$operate('type', $type);
-    }
-
-    /**
-     * 篩選 顯示狀態
-     *
-     * @param $query
-     * @param array $attributes
-     * @return mixed
-     */
-    public function scopeStatus(Builder $query, array $attributes)
-    {
-        $status = Arr::get($attributes, 'status');
-
-        $operate = (is_array($status)) ? 'whereIn' : 'where';
-
-        return $query->$operate('status', $status);
-    }
-
-    /**
-     * 篩選 時間區間
-     *
-     * @param $query
-     * @param array $attributes
-     * @return mixed
-     */
-    public function scopeTimeBetween(Builder $query, array $attributes)
-    {
-        $beginAt = Arr::get($attributes, 'timeBetween.beginAt');
-        $endAt = Arr::get($attributes, 'timeBetween.endAt');
-
-        return $query->whereBetween('created_at', [$beginAt, $endAt]);
-    }
-
-    /**
-     * 排去 時間
-     *
-     * @param $query
-     * @param array $attributes
-     * @return mixed
-     */
-    public function scopeTimeSort(Builder $query, array $attributes)
-    {
-        $sort = Arr::get($attributes, 'timeSort');
-
-        return $query->orderBy('created_at', $sort);
+        static::addGlobalScope(new OperationRecordScope);
     }
 
     public function getCreatedAtDateTimeAttribute()
