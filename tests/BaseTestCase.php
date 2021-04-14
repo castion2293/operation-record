@@ -118,12 +118,12 @@ class BaseTestCase extends TestCase
         $app['config']->set('database.connections.testing', [
             'driver' => env('TEST_DB_DRIVER', 'mysql'),
             'read' => [
-                'host' => env('TEST_DB_HOST_READ', 'localhost'),
+                'host' => env('TEST_DB_HOST_READ', '127.0.0.1'),
             ],
             'write' => [
-                'host' => env('TEST_DB_HOST_WRITE', 'localhost'),
+                'host' => env('TEST_DB_HOST_WRITE', '127.0.0.1'),
             ],
-            'host' => env('TEST_DB_HOST', 'localhost'),
+            'host' => env('TEST_DB_HOST', '127.0.0.1'),
             'database' => env('TEST_DB_DATABASE', 'operation'),
             'port' => env('TEST_DB_PORT', 3306),
             'username' => env('TEST_DB_USERNAME', 'root'),
