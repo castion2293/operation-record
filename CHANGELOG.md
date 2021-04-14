@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/castion2293/operation-record/compare/v1.1.18...v2.0.0) (2021-04-14)
+
 ### [1.1.18](https://github.com/castion2293/operation-record/compare/v1.1.17...v1.1.18) (2021-04-14)
 
 ### [1.1.17](https://github.com/castion2293/operation-record/compare/v1.1.16...v1.1.17) (2021-04-14)
