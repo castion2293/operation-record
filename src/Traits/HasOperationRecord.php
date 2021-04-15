@@ -19,9 +19,9 @@ trait HasOperationRecord
      * @param string $ip
      * @param string $comment
      */
-    public function operating(Model $model, string $funcKey, array $old = [], array $new = [], string $ip = '', string $comment = ''): void
+    public function operating(Model $model, string $funcKey, array $old = [], array $new = [], string $ip = ''): void
     {
-        OperationRecord::create($this->id, $this::class, $model->id, $model::class, $funcKey, $old, $new, $ip, $comment);
+        OperationRecord::create($this->id, $this::class, $model->id, $model::class, $funcKey, $old, $new, $ip);
     }
 
     /**
@@ -44,8 +44,7 @@ trait HasOperationRecord
      */
     public function getOperatorRecords(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->morphMany(OperationRecordModel::class, 'operator')
-            ->select(['operator_id', 'subject_id', 'old', 'new', 'ip', 'created_at', 'updated_at']);
+        return $this->morphMany(OperationRecordModel::class, 'operator');
     }
 
     /**
@@ -53,7 +52,6 @@ trait HasOperationRecord
      */
     public function getSubjectRecords(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->morphMany(OperationRecordModel::class, 'subject')
-            ->select(['operator_id', 'subject_id', 'old', 'new', 'ip', 'created_at', 'updated_at']);
+        return $this->morphMany(OperationRecordModel::class, 'subject');
     }
 }

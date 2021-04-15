@@ -20,11 +20,10 @@ class CreateOperationRecordTable extends Migration
             $table->string('operator_type')->comment('修改者類型');
             $table->unsignedBigInteger('subject_id')->comment('被修改者ID');
             $table->string('subject_type')->comment('被修改者類型');
-            $table->string('func_key', 10)->comment('功能key');
+            $table->smallInteger('func_key')->comment('功能key');
             $table->json('old')->nullable()->comment('修改前內容');
             $table->json('new')->nullable()->comment('修改後內容');
             $table->string('ip', 46)->default('')->comment('IP');
-            $table->text('comment')->nullable()->comment('備註');
 
             // 建立時間
             $table->datetime('created_at')

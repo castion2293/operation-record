@@ -22,6 +22,7 @@ class OperationRecord
      * @param string $operatorType
      * @param int $subjectId
      * @param string $subjectType
+     * @param string $funcKey
      * @param array $old
      * @param array $new
      * @param string $ip
@@ -37,7 +38,6 @@ class OperationRecord
         array $old = [],
         array $new = [],
         string $ip = '',
-        string $comment = '',
     ): bool {
         return $this->operationRecordService->create(
             [
@@ -49,49 +49,47 @@ class OperationRecord
                 'old' => $old,
                 'new' => $new,
                 'ip' => $ip,
-                'comment' => $comment
             ]
         );
     }
 
-//    /**
-//     * 建立一筆 操作記錄 使用 queue job 的方式
-//     *
-//     * @param int $operatorId
-//     * @param int $subjectId
-//     * @param int $funcKey
-//     * @param int $status
-//     * @param string $type
-//     * @param string $targets
-//     * @param string $content
-//     * @param string $ip
-//     * @return array
-//     */
-//    public function dispatch(
-//        int $operatorId,
-//        int $subjectId,
-//        int $funcKey,
-//        int $status,
-//        string $type,
-//        string $targets,
-//        string $content,
-//        string $ip = ''
-//    ) {
-//        dispatch(
-//            new OperationRecordCreateJob(
-//                [
-//                    'operator_id' => $operatorId,
-//                    'subject_id' => $subjectId,
-//                    'func_key' => $funcKey,
-//                    'status' => $status,
-//                    'type' => $type,
-//                    'targets' => $targets,
-//                    'content' => $content,
-//                    'ip' => $ip
-//                ]
-//            )
-//        )->onQueue(config('operation_record.queue'));
-//    }
+    /**
+     * 建立一筆 操作記錄 使用 queue job 的方式
+     *
+     * @param int $operatorId
+     * @param string $operatorType
+     * @param int $subjectId
+     * @param string $subjectType
+     * @param int $funcKey
+     * @param array $old
+     * @param array $new
+     * @param string $ip
+     */
+    public function dispatch(
+        int $operatorId,
+        string $operatorType,
+        int $subjectId,
+        string $subjectType,
+        int $funcKey,
+        array $old = [],
+        array $new = [],
+        string $ip = ''
+    ) {
+        dispatch(
+            new OperationRecordCreateJob(
+                [
+                    'operator_id' => $operatorId,
+                    'operator_type' => $operatorType,
+                    'subject_id' => $subjectId,
+                    'subject_type' => $subjectType,
+                    'func_key' => $funcKey,
+                    'old' => $old,
+                    'new' => $new,
+                    'ip' => $ip,
+                ]
+            )
+        )->onQueue(config('operation_record.queue'));
+    }
 
     /**
      * 搜尋操作紀錄

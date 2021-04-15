@@ -5,7 +5,6 @@ namespace Pharaoh\OperationRecord\Tests;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
 use Pharaoh\OperationRecord\Facades\OperationRecord;
 use Pharaoh\OperationRecord\Tests\Models\Post;
 use Pharaoh\OperationRecord\Tests\Models\User;
@@ -36,12 +35,11 @@ class ModelOperationRecordTest extends BaseTestCase
         // Arrange
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
-        $funcKey = '1101';
+        $funcKey = 1101;
         $ip = '192.168.0.1';
-        $comment = '這是備註';
 
         // Act
-        $this->user->operating($this->post, $funcKey, $old, $new, $ip, $comment);
+        $this->user->operating($this->post, $funcKey, $old, $new, $ip);
 
         // Assert
         $this->assertDatabaseHas(
@@ -53,7 +51,6 @@ class ModelOperationRecordTest extends BaseTestCase
                 'subject_type' => $this->post::class,
                 'func_key' => $funcKey,
                 'ip' => $ip,
-                'comment' => $comment
             ]
         );
     }
@@ -66,12 +63,11 @@ class ModelOperationRecordTest extends BaseTestCase
         // Arrange
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
-        $funcKey = '1101';
+        $funcKey = 1101;
         $ip = '192.168.0.1';
-        $comment = '這是備註';
 
         // Act
-        $this->post->operatedBy($this->user, $funcKey, $old, $new, $ip, $comment);
+        $this->post->operatedBy($this->user, $funcKey, $old, $new, $ip);
 
         // Assert
         $this->assertDatabaseHas(
@@ -83,7 +79,6 @@ class ModelOperationRecordTest extends BaseTestCase
                 'subject_type' => $this->post::class,
                 'func_key' => $funcKey,
                 'ip' => $ip,
-                'comment' => $comment
             ]
         );
     }
@@ -98,7 +93,6 @@ class ModelOperationRecordTest extends BaseTestCase
         $new = ['title' => 'new_title'];
         $funcKey = '1101';
         $ip = '192.168.0.1';
-        $comment = '這是備註';
 
         for ($i = 0; $i < 10; $i++) {
             OperationRecord::create(
@@ -110,7 +104,6 @@ class ModelOperationRecordTest extends BaseTestCase
                 $old,
                 $new,
                 $ip,
-                $comment
             );
         }
 
@@ -132,9 +125,8 @@ class ModelOperationRecordTest extends BaseTestCase
         // Arrange
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
-        $funcKey = '1101';
+        $funcKey = 1101;
         $ip = '192.168.0.1';
-        $comment = '這是備註';
 
         for ($i = 0; $i < 7; $i++) {
             OperationRecord::create(
@@ -146,7 +138,6 @@ class ModelOperationRecordTest extends BaseTestCase
                 $old,
                 $new,
                 $ip,
-                $comment
             );
         }
 
@@ -160,7 +151,6 @@ class ModelOperationRecordTest extends BaseTestCase
                 $old,
                 $new,
                 $ip,
-                $comment
             );
         }
 

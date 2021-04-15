@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Queue;
 use Pharaoh\OperationRecord\Facades\OperationRecord;
 use Pharaoh\OperationRecord\Jobs\OperationRecordCreateJob;
 use Pharaoh\OperationRecord\Models\OperationRecord as OperationRecordModel;
+use Pharaoh\OperationRecord\Tests\Models\Post;
+use Pharaoh\OperationRecord\Tests\Models\User;
 
 class OperationRecordTest extends BaseTestCase
 {
@@ -27,14 +29,12 @@ class OperationRecordTest extends BaseTestCase
         $operatorId = 1;
         $subjectId = 2;
         $funcKey = 1104;
-        $status = 1;
-        $type = 'admin';
-        $targets = '修改目標';
-        $content = '修改內容';
+        $old = ['title' => 'old_title'];
+        $new = ['title' => 'new_title'];
         $ip = '127.0.0.1';
 
         // Act
-        $result = OperationRecord::create($operatorId, $subjectId, $funcKey, $status, $type, $targets, $content, $ip);
+        $result = OperationRecord::create($operatorId, User::class, $subjectId, Post::class, $funcKey, $old, $new, $ip);
 
         // Assert
         $this->assertTrue($result);
@@ -43,12 +43,10 @@ class OperationRecordTest extends BaseTestCase
             'operation_records',
             [
                 'operator_id' => $operatorId,
-                'func_key' => $funcKey,
+                'operator_type' => User::class,
                 'subject_id' => $subjectId,
-                'type' => $type,
-                'status' => $status,
-                'targets' => $targets,
-                'content' => $content,
+                'subject_type' => Post::class,
+                'func_key' => $funcKey,
                 'ip' => $ip
             ]
         );
@@ -63,16 +61,14 @@ class OperationRecordTest extends BaseTestCase
         $operatorId = 1;
         $subjectId = 2;
         $funcKey = 1104;
-        $status = 1;
-        $type = 'admin';
-        $targets = '修改目標';
-        $content = '修改內容';
+        $old = ['title' => 'old_title'];
+        $new = ['title' => 'new_title'];
         $ip = '127.0.0.1';
 
         Queue::fake();
 
         // Act
-        OperationRecord::dispatch($operatorId, $subjectId, $funcKey, $status, $type, $targets, $content, $ip);
+        OperationRecord::dispatch($operatorId, User::class, $subjectId, Post::class, $funcKey, $old, $new, $ip);
 
         // Assert
         Queue::assertPushed(function (OperationRecordCreateJob $job) use ($operatorId) {
