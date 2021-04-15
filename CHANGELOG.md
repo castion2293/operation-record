@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/castion2293/operation-record/compare/v2.0.0...v2.0.1) (2021-04-15)
+
+
+### Bug Fixes
+
+* 修改facade create records方式([@nick](https://github.com/nick)) ([6fbca66](https://github.com/castion2293/operation-record/commit/6fbca6673a6a7a962649d760e7cf457dfc0490a1))
+
 ## [2.0.0](https://github.com/castion2293/operation-record/compare/v1.1.18...v2.0.0) (2021-04-14)
 
 ### [1.1.18](https://github.com/castion2293/operation-record/compare/v1.1.17...v1.1.18) (2021-04-14)
