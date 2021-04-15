@@ -111,33 +111,21 @@ class OperationRecord
             'page' => 1
         ];
 
-        if (array_key_exists('operator_id', $params)) {
-            $attributes['operatorId'] = Arr::get($params, 'operator_id');
+        if (array_key_exists('operator', $params)) {
+            $attributes['operator'] = Arr::get($params, 'operator');
         }
 
-        if (array_key_exists('subject_id', $params)) {
-            $attributes['subjectId'] = Arr::get($params, 'subject_id');
+        if (array_key_exists('subject', $params)) {
+            $attributes['subject'] = Arr::get($params, 'subject');
         }
 
         if (array_key_exists('func_key', $params)) {
             $attributes['funcKey'] = Arr::get($params, 'func_key');
         }
 
-        if (array_key_exists('status', $params)) {
-            $attributes['status'] = Arr::get($params, 'status');
-        }
-
-        if (array_key_exists('type', $params)) {
-            $attributes['type'] = Arr::get($params, 'type');
-        }
-
         if (array_key_exists('begin_at', $params) && array_key_exists('end_at', $params)) {
             $attributes['timeBetween']['beginAt'] = Arr::get($params, 'begin_at');
             $attributes['timeBetween']['endAt'] = Arr::get($params, 'end_at');
-        }
-
-        if (array_key_exists('type', $params)) {
-            $attributes['timeSort'] = Arr::get($params, 'sort');
         }
 
         if (array_key_exists('per_page', $params)) {

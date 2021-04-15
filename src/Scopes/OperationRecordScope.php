@@ -13,11 +13,9 @@ class OperationRecordScope implements Scope
      * @var array
      */
     protected $extensions = [
-        'OperatorId',
-        'SubjectId',
+        'Operator',
+        'Subject',
         'FuncKey',
-        'Type',
-        'Status',
         'TimeBetween',
         'TimeSort'
     ];
@@ -45,15 +43,19 @@ class OperationRecordScope implements Scope
      *
      * @param Builder $builder
      */
-    protected function addOperatorId(Builder $builder)
+    protected function addOperator(Builder $builder)
     {
-        $builder->macro('operatorId', function (Builder $builder, array $attributes) {
-            $operatorId = Arr::get($attributes, 'operatorId');
+        $builder->macro(
+            'operator',
+            function (Builder $builder, array $attributes) {
+                $operatorId = Arr::get($attributes, 'operator.id');
+                $operatorType = Arr::get($attributes, 'operator.type');
 
-            $operate = (is_array($operatorId)) ? 'whereIn' : 'where';
+                $operate = (is_array($operatorId)) ? 'whereIn' : 'where';
 
-            return $builder->$operate('operator_id', $operatorId);
-        });
+                return $builder->$operate('operator_id', $operatorId)->where('operator_type', $operatorType);
+            }
+        );
     }
 
     /**
@@ -61,15 +63,19 @@ class OperationRecordScope implements Scope
      *
      * @param Builder $builder
      */
-    protected function addSubjectId(Builder $builder)
+    protected function addSubject(Builder $builder)
     {
-        $builder->macro('subjectId', function (Builder $builder, array $attributes) {
-            $subjectId = Arr::get($attributes, 'subjectId');
+        $builder->macro(
+            'subject',
+            function (Builder $builder, array $attributes) {
+                $subjectId = Arr::get($attributes, 'subject.id');
+                $subjectType = Arr::get($attributes, 'subject.type');
 
-            $operate = (is_array($subjectId)) ? 'whereIn' : 'where';
+                $operate = (is_array($subjectId)) ? 'whereIn' : 'where';
 
-            return $builder->$operate('subject_id', $subjectId);
-        });
+                return $builder->$operate('subject_id', $subjectId)->where('subject_type', $subjectType);
+            }
+        );
     }
 
     /**
@@ -79,45 +85,16 @@ class OperationRecordScope implements Scope
      */
     protected function addFuncKey(Builder $builder)
     {
-        $builder->macro('funcKey', function (Builder $builder, array $attributes) {
-            $funcKey = Arr::get($attributes, 'funcKey');
+        $builder->macro(
+            'funcKey',
+            function (Builder $builder, array $attributes) {
+                $funcKey = Arr::get($attributes, 'funcKey');
 
-            $operate = (is_array($funcKey)) ? 'whereIn' : 'where';
+                $operate = (is_array($funcKey)) ? 'whereIn' : 'where';
 
-            return $builder->$operate('func_key', $funcKey);
-        });
-    }
-
-    /**
-     * 篩選 操作者類型
-     *
-     * @param Builder $builder
-     */
-    protected function addType(Builder $builder)
-    {
-        $builder->macro('type', function (Builder $builder, array $attributes) {
-            $funcKey = Arr::get($attributes, 'type');
-
-            $operate = (is_array($funcKey)) ? 'whereIn' : 'where';
-
-            return $builder->$operate('type', $funcKey);
-        });
-    }
-
-    /**
-     * 篩選 顯示狀態
-     *
-     * @param Builder $builder
-     */
-    protected function addStatus(Builder $builder)
-    {
-        $builder->macro('status', function (Builder $builder, array $attributes) {
-            $status = Arr::get($attributes, 'status');
-
-            $operate = (is_array($status)) ? 'whereIn' : 'where';
-
-            return $builder->$operate('status', $status);
-        });
+                return $builder->$operate('func_key', $funcKey);
+            }
+        );
     }
 
     /**
@@ -127,12 +104,15 @@ class OperationRecordScope implements Scope
      */
     protected function addTimeBetween(Builder $builder)
     {
-        $builder->macro('timeBetween', function (Builder $builder, array $attributes) {
-            $beginAt = Arr::get($attributes, 'timeBetween.beginAt');
-            $endAt = Arr::get($attributes, 'timeBetween.endAt');
+        $builder->macro(
+            'timeBetween',
+            function (Builder $builder, array $attributes) {
+                $beginAt = Arr::get($attributes, 'timeBetween.beginAt');
+                $endAt = Arr::get($attributes, 'timeBetween.endAt');
 
-            return $builder->whereBetween('created_at', [$beginAt, $endAt]);
-        });
+                return $builder->whereBetween('created_at', [$beginAt, $endAt]);
+            }
+        );
     }
 
     /**
@@ -142,10 +122,13 @@ class OperationRecordScope implements Scope
      */
     protected function addTimeSort(Builder $builder)
     {
-        $builder->macro('timeSort', function (Builder $builder, array $attributes) {
-            $sort = Arr::get($attributes, 'timeSort');
+        $builder->macro(
+            'timeSort',
+            function (Builder $builder, array $attributes) {
+                $sort = Arr::get($attributes, 'timeSort');
 
-            return $builder->orderBy('created_at', $sort);
-        });
+                return $builder->orderBy('created_at', $sort);
+            }
+        );
     }
 }

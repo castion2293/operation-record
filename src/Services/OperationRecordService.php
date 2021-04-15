@@ -38,11 +38,9 @@ class OperationRecordService
     /**
      * 搜尋操作紀錄
      * params 欄位:
-     *   operatorId
-     *   subjectId
+     *   operator
+     *   subject
      *   funcKey
-     *   type
-     *   status
      *   timeBetween
      *   timeSort
      *   page
@@ -78,15 +76,15 @@ class OperationRecordService
                         return [
                             'id' => data_get($record, 'id'),
                             'operator_id' => data_get($record, 'operator_id'),
-                            'func_key' => data_get($record, 'func_key'),
+                            'operator_type' => data_get($record, 'operator_type'),
                             'subject_id' => data_get($record, 'subject_id'),
-                            'type' => data_get($record, 'type'),
-                            'status' => data_get($record, 'status'),
-                            'targets' => data_get($record, 'targets'),
-                            'content' => data_get($record, 'content'),
+                            'subject_type' => data_get($record, 'subject_type'),
+                            'func_key' => data_get($record, 'func_key'),
+                            'old' => data_get($record, 'old'),
+                            'new' => data_get($record, 'new'),
                             'ip' => data_get($record, 'ip'),
-                            'created_at' => $record->createdAtDateTime,
-                            'updated_at' => $record->updatedAtDateTime,
+                            'created_at' => data_get($record, 'created_at')->toDateTimeString(),
+                            'updated_at' => data_get($record, 'updated_at')->toDateTimeString(),
                         ];
                     }
                 )->toArray()

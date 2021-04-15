@@ -71,9 +71,11 @@ class OperationRecordTest extends BaseTestCase
         OperationRecord::dispatch($operatorId, User::class, $subjectId, Post::class, $funcKey, $old, $new, $ip);
 
         // Assert
-        Queue::assertPushed(function (OperationRecordCreateJob $job) use ($operatorId) {
-            return Arr::get($job->params, 'operator_id') === $operatorId;
-        });
+        Queue::assertPushed(
+            function (OperationRecordCreateJob $job) use ($operatorId) {
+                return Arr::get($job->params, 'operator_id') === $operatorId;
+            }
+        );
         Queue::assertPushed(OperationRecordCreateJob::class, 1);
     }
 
@@ -84,24 +86,35 @@ class OperationRecordTest extends BaseTestCase
     {
         // Arrange
         $operatorId = 1;
+        $subjectId = 2;
         $funcKey = 1104;
-        $status = 1;
-        $type = 'admin';
+        $old = ['title' => 'old_title'];
+        $new = ['title' => 'new_title'];
+        $ip = '127.0.0.1';
 
         OperationRecordModel::factory()->count(20)->create(
             [
                 'operator_id' => $operatorId,
+                'operator_type' => User::class,
+                'subject_id' => $subjectId,
+                'subject_type' => Post::class,
                 'func_key' => $funcKey,
-                'type' => $type,
-                'status' => $status,
+                'old' => $old,
+                'new' => $new,
+                'ip' => $ip
             ]
         );
 
         $params = [
-            'operator_id' => [$operatorId, 2],
-            'func_key' => [$funcKey, '1111'],
-            'status' => [$status, 2],
-            'type' => $type,
+            'operator' => [
+                'id' => [1, 3],
+                'type' => User::class,
+            ],
+            'subject' => [
+                'id' => [2, 4],
+                'type' => Post::class,
+            ],
+            'func_key' => [$funcKey, 1120],
             'begin_at' => now()->startOfDay()->toDateTimeString(),
             'end_at' => now()->endOfDay()->toDateTimeString(),
             'sort' => 'desc',
@@ -127,10 +140,17 @@ class OperationRecordTest extends BaseTestCase
     public function testRemoveBefore()
     {
         // Arrange
-        OperationRecordModel::factory()->create();
+        OperationRecordModel::factory()->create(
+            [
+                'operator_type' => User::class,
+                'subject_type' => Post::class,
+            ]
+        );
 
         OperationRecordModel::factory()->count(20)->create(
             [
+                'operator_type' => User::class,
+                'subject_type' => Post::class,
                 'created_at' => now()->subMonths(4)->toDateTimeString(),
                 'updated_at' => now()->subMonths(4)->toDateTimeString()
             ]
@@ -152,10 +172,17 @@ class OperationRecordTest extends BaseTestCase
     public function testRemoveAfter()
     {
         // Arrange
-        OperationRecordModel::factory()->count(20)->create();
+        OperationRecordModel::factory()->count(20)->create(
+            [
+                'operator_type' => User::class,
+                'subject_type' => Post::class,
+            ]
+        );
 
         OperationRecordModel::factory()->create(
             [
+                'operator_type' => User::class,
+                'subject_type' => Post::class,
                 'created_at' => now()->subMonths(4)->toDateTimeString(),
                 'updated_at' => now()->subMonths(4)->toDateTimeString()
             ]
@@ -177,7 +204,12 @@ class OperationRecordTest extends BaseTestCase
     public function testTruncate()
     {
         // Arrange
-        OperationRecordModel::factory()->count(20)->create();
+        OperationRecordModel::factory()->count(20)->create(
+            [
+                'operator_type' => User::class,
+                'subject_type' => Post::class,
+            ]
+        );
 
         // Act
         $result = OperationRecord::truncate();

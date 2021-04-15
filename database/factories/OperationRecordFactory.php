@@ -24,12 +24,9 @@ class OperationRecordFactory extends Factory
     {
         return [
             'operator_id' => $this->faker->randomDigit,
-            'ip' => $this->faker->ipv4,
-            'func_key' => $this->faker->randomNumber(4),
             'subject_id' => $this->faker->randomDigit,
-            'type' => Arr::random(['admin', 'agent']),
-            'targets' => $this->faker->name,
-            'content' => $this->faker->sentence,
+            'func_key' => $this->faker->randomNumber(4),
+            'ip' => $this->faker->ipv4,
         ];
     }
 }
