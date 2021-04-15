@@ -111,7 +111,7 @@ class ModelOperationRecordTest extends BaseTestCase
         $end = now()->endOfDay()->toDateTimeString();
 
         // Act
-        $records = $this->user->getOperatorRecords($start, $end)->get()->toArray();
+        $records = $this->user->getOperatorRecords()->get()->toArray();
 
         // Assert
         $this->assertCount(10, $records);
@@ -161,7 +161,7 @@ class ModelOperationRecordTest extends BaseTestCase
         $end = now()->endOfDay()->toDateTimeString();
 
         // Act
-        $records = $this->post->getSubjectRecords($start, $end)->get()->toArray();
+        $records = $this->post->getSubjectRecords()->get()->toArray();
 
         // Assert
         $this->assertCount(7, $records);

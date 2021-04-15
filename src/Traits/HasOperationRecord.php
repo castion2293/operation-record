@@ -42,26 +42,20 @@ trait HasOperationRecord
     /**
      * 修改者紀錄
      *
-     * @param string $start
-     * @param string $end
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function getOperatorRecords(string $start, string $end): \Illuminate\Database\Eloquent\Relations\MorphMany
+    public function getOperatorRecords(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->morphMany(OperationRecordModel::class, 'operator')
-            ->whereBetween('created_at', [$start, $end]);
+        return $this->morphMany(OperationRecordModel::class, 'operator');
     }
 
     /**
      * 被修改者紀錄
      *
-     * @param string $start
-     * @param string $end
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function getSubjectRecords(string $start, string $end): \Illuminate\Database\Eloquent\Relations\MorphMany
+    public function getSubjectRecords(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->morphMany(OperationRecordModel::class, 'subject')
-            ->whereBetween('created_at', [$start, $end]);
+        return $this->morphMany(OperationRecordModel::class, 'subject');
     }
 }
