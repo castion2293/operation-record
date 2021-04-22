@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.4](https://github.com/castion2293/operation-record/compare/v2.0.3...v2.0.4) (2021-04-22)
+
+
+### Bug Fixes
+
+* 修改向下支援php7.3([@nick](https://github.com/nick)) ([bc300cd](https://github.com/castion2293/operation-record/commit/bc300cd43d3a021b80249428e36d3263c50ea4d6))
+
 ### [2.0.3](https://github.com/castion2293/operation-record/compare/v2.0.2...v2.0.3) (2021-04-15)
 
 
