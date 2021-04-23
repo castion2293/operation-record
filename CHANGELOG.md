@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.5](https://github.com/castion2293/operation-record/compare/v2.0.4...v2.0.5) (2021-04-23)
+
+
+### Bug Fixes
+
+* 修改composer.json([@nick](https://github.com/nick)) ([88ef544](https://github.com/castion2293/operation-record/commit/88ef544f17e63466f02cdd4d26b9e7921274fb12))
+
 ### [2.0.4](https://github.com/castion2293/operation-record/compare/v2.0.3...v2.0.4) (2021-04-22)
 
 
