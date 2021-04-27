@@ -23,6 +23,7 @@ class OperationRecord
      * @param int $subjectId
      * @param string $subjectType
      * @param string $funcKey
+     * @param int $action
      * @param array $old
      * @param array $new
      * @param string $ip
@@ -35,6 +36,7 @@ class OperationRecord
         int $subjectId,
         string $subjectType,
         string $funcKey,
+        int $action,
         array $old = [],
         array $new = [],
         string $ip = '',
@@ -46,6 +48,7 @@ class OperationRecord
                 'subject_id' => $subjectId,
                 'subject_type' => $subjectType,
                 'func_key' => $funcKey,
+                'action' => $action,
                 'old' => $old,
                 'new' => $new,
                 'ip' => $ip,
@@ -61,6 +64,7 @@ class OperationRecord
      * @param int $subjectId
      * @param string $subjectType
      * @param int $funcKey
+     * @param int $action
      * @param array $old
      * @param array $new
      * @param string $ip
@@ -71,6 +75,7 @@ class OperationRecord
         int $subjectId,
         string $subjectType,
         int $funcKey,
+        int $action,
         array $old = [],
         array $new = [],
         string $ip = ''
@@ -83,6 +88,7 @@ class OperationRecord
                     'subject_id' => $subjectId,
                     'subject_type' => $subjectType,
                     'func_key' => $funcKey,
+                    'action' => $action,
                     'old' => $old,
                     'new' => $new,
                     'ip' => $ip,
@@ -121,6 +127,10 @@ class OperationRecord
 
         if (array_key_exists('func_key', $params)) {
             $attributes['funcKey'] = Arr::get($params, 'func_key');
+        }
+
+        if (array_key_exists('action', $params)) {
+            $attributes['action'] = Arr::get($params, 'action');
         }
 
         if (array_key_exists('begin_at', $params) && array_key_exists('end_at', $params)) {

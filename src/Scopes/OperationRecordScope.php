@@ -16,6 +16,7 @@ class OperationRecordScope implements Scope
         'Operator',
         'Subject',
         'FuncKey',
+        'Action',
         'TimeBetween',
         'TimeSort'
     ];
@@ -93,6 +94,23 @@ class OperationRecordScope implements Scope
                 $operate = (is_array($funcKey)) ? 'whereIn' : 'where';
 
                 return $builder->$operate('func_key', $funcKey);
+            }
+        );
+    }
+
+    /**
+     * 篩選 動作
+     *
+     * @param Builder $builder
+     */
+    protected function addAction(Builder $builder)
+    {
+        $builder->macro(
+            'action',
+            function (Builder $builder, array $attributes) {
+                $action = Arr::get($attributes, 'action');
+
+                return $builder->where('action', $action);
             }
         );
     }

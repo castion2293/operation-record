@@ -21,6 +21,7 @@ class CreateOperationRecordTable extends Migration
             $table->unsignedBigInteger('subject_id')->comment('被修改者ID');
             $table->string('subject_type')->comment('被修改者類型');
             $table->smallInteger('func_key')->comment('功能key');
+            $table->tinyInteger('action')->comment('動作 (1: 新增, 2: 修改, 3: 刪除');
             $table->json('old')->nullable()->comment('修改前內容');
             $table->json('new')->nullable()->comment('修改後內容');
             $table->string('ip', 46)->default('')->comment('IP');

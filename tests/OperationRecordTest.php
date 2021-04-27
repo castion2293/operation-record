@@ -29,12 +29,13 @@ class OperationRecordTest extends BaseTestCase
         $operatorId = 1;
         $subjectId = 2;
         $funcKey = 1104;
+        $action = config('operation_record.action.update');
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
         $ip = '127.0.0.1';
 
         // Act
-        $result = OperationRecord::create($operatorId, User::class, $subjectId, Post::class, $funcKey, $old, $new, $ip);
+        $result = OperationRecord::create($operatorId, User::class, $subjectId, Post::class, $funcKey, $action, $old, $new, $ip);
 
         // Assert
         $this->assertTrue($result);
@@ -47,6 +48,7 @@ class OperationRecordTest extends BaseTestCase
                 'subject_id' => $subjectId,
                 'subject_type' => Post::class,
                 'func_key' => $funcKey,
+                'action' => $action,
                 'ip' => $ip
             ]
         );
@@ -61,6 +63,7 @@ class OperationRecordTest extends BaseTestCase
         $operatorId = 1;
         $subjectId = 2;
         $funcKey = 1104;
+        $action = config('operation_record.action.update');
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
         $ip = '127.0.0.1';
@@ -68,7 +71,7 @@ class OperationRecordTest extends BaseTestCase
         Queue::fake();
 
         // Act
-        OperationRecord::dispatch($operatorId, User::class, $subjectId, Post::class, $funcKey, $old, $new, $ip);
+        OperationRecord::dispatch($operatorId, User::class, $subjectId, Post::class, $funcKey, $action, $old, $new, $ip);
 
         // Assert
         Queue::assertPushed(
@@ -88,6 +91,7 @@ class OperationRecordTest extends BaseTestCase
         $operatorId = 1;
         $subjectId = 2;
         $funcKey = 1104;
+        $action = config('operation_record.action.update');
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
         $ip = '127.0.0.1';
@@ -99,6 +103,7 @@ class OperationRecordTest extends BaseTestCase
                 'subject_id' => $subjectId,
                 'subject_type' => Post::class,
                 'func_key' => $funcKey,
+                'action' => $action,
                 'old' => $old,
                 'new' => $new,
                 'ip' => $ip
@@ -115,6 +120,7 @@ class OperationRecordTest extends BaseTestCase
                 'type' => Post::class,
             ],
             'func_key' => [$funcKey, 1120],
+            'action' => $action,
             'begin_at' => now()->startOfDay()->toDateTimeString(),
             'end_at' => now()->endOfDay()->toDateTimeString(),
             'sort' => 'desc',

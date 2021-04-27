@@ -14,14 +14,14 @@ trait HasOperationRecord
      *
      * @param Model $model
      * @param string $funcKey
+     * @param int $action
      * @param array $old
      * @param array $new
      * @param string $ip
-     * @param string $comment
      */
-    public function operating(Model $model, string $funcKey, array $old = [], array $new = [], string $ip = ''): void
+    public function operating(Model $model, string $funcKey, int $action, array $old = [], array $new = [], string $ip = ''): void
     {
-        OperationRecord::create($this->id, $this::class, $model->id, $model::class, $funcKey, $old, $new, $ip);
+        OperationRecord::create($this->id, $this::class, $model->id, $model::class, $funcKey, $action, $old, $new, $ip);
     }
 
     /**
@@ -29,14 +29,15 @@ trait HasOperationRecord
      *
      * @param Model $model
      * @param string $funcKey
+     * @param int $action
      * @param array $old
      * @param array $new
      * @param string $ip
      * @param string $comment
      */
-    public function operatedBy(Model $model, string $funcKey, array $old = [], array $new = [], string $ip = '', string $comment = '')
+    public function operatedBy(Model $model, string $funcKey, int $action, array $old = [], array $new = [], string $ip = '', string $comment = '')
     {
-        OperationRecord::create($model->id, $model::class, $this->id, $this::class, $funcKey, $old, $new, $ip, $comment);
+        OperationRecord::create($model->id, $model::class, $this->id, $this::class, $funcKey, $action, $old, $new, $ip, $comment);
     }
 
     /**

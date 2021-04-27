@@ -36,10 +36,11 @@ class ModelOperationRecordTest extends BaseTestCase
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
         $funcKey = 1101;
+        $action = config('operation_record.action.update');
         $ip = '192.168.0.1';
 
         // Act
-        $this->user->operating($this->post, $funcKey, $old, $new, $ip);
+        $this->user->operating($this->post, $funcKey, $action, $old, $new, $ip);
 
         // Assert
         $this->assertDatabaseHas(
@@ -50,6 +51,7 @@ class ModelOperationRecordTest extends BaseTestCase
                 'subject_id' => $this->post->id,
                 'subject_type' => $this->post::class,
                 'func_key' => $funcKey,
+                'action' => $action,
                 'ip' => $ip,
             ]
         );
@@ -64,10 +66,11 @@ class ModelOperationRecordTest extends BaseTestCase
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
         $funcKey = 1101;
+        $action = config('operation_record.action.update');
         $ip = '192.168.0.1';
 
         // Act
-        $this->post->operatedBy($this->user, $funcKey, $old, $new, $ip);
+        $this->post->operatedBy($this->user, $funcKey, $action, $old, $new, $ip);
 
         // Assert
         $this->assertDatabaseHas(
@@ -78,6 +81,7 @@ class ModelOperationRecordTest extends BaseTestCase
                 'subject_id' => $this->post->id,
                 'subject_type' => $this->post::class,
                 'func_key' => $funcKey,
+                'action' => $action,
                 'ip' => $ip,
             ]
         );
@@ -92,6 +96,7 @@ class ModelOperationRecordTest extends BaseTestCase
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
         $funcKey = '1101';
+        $action = config('operation_record.action.update');
         $ip = '192.168.0.1';
 
         for ($i = 0; $i < 10; $i++) {
@@ -101,14 +106,12 @@ class ModelOperationRecordTest extends BaseTestCase
                 $this->post->id,
                 $this->post::class,
                 $funcKey,
+                $action,
                 $old,
                 $new,
                 $ip,
             );
         }
-
-        $start = now()->startOfDay()->toDateTimeString();
-        $end = now()->endOfDay()->toDateTimeString();
 
         // Act
         $records = $this->user->getOperatorRecords()->get()->toArray();
@@ -129,6 +132,7 @@ class ModelOperationRecordTest extends BaseTestCase
         $old = ['title' => 'old_title'];
         $new = ['title' => 'new_title'];
         $funcKey = 1101;
+        $action = config('operation_record.action.update');
         $ip = '192.168.0.1';
 
         for ($i = 0; $i < 7; $i++) {
@@ -138,6 +142,7 @@ class ModelOperationRecordTest extends BaseTestCase
                 $this->post->id,
                 $this->post::class,
                 $funcKey,
+                $action,
                 $old,
                 $new,
                 $ip,
@@ -151,14 +156,12 @@ class ModelOperationRecordTest extends BaseTestCase
                 3,
                 $this->post::class,
                 $funcKey,
+                $action,
                 $old,
                 $new,
                 $ip,
             );
         }
-
-        $start = now()->startOfDay()->toDateTimeString();
-        $end = now()->endOfDay()->toDateTimeString();
 
         // Act
         $records = $this->post->getSubjectRecords()->get()->toArray();
