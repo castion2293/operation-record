@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.6](https://github.com/castion2293/operation-record/compare/v2.0.5...v2.0.6) (2021-04-27)
+
+
+### Bug Fixes
+
+* 增加動作行為欄位([@nick](https://github.com/nick)) ([2039a42](https://github.com/castion2293/operation-record/commit/2039a421e8e0f9adfed4eef5403b97f05e74a46e))
+
 ### [2.0.5](https://github.com/castion2293/operation-record/compare/v2.0.4...v2.0.5) (2021-04-23)
 
 
