@@ -145,7 +145,7 @@ class OperationRecordScope implements Scope
             function (Builder $builder, array $attributes) {
                 $sort = Arr::get($attributes, 'timeSort');
 
-                return $builder->orderBy('created_at', $sort);
+                return $builder->orderBy('id', $sort);
             }
         );
     }
