@@ -2,9 +2,11 @@
 
 namespace Pharaoh\OperationRecord\Tests;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Schema;
 use Pharaoh\OperationRecord\Facades\OperationRecord;
 use Pharaoh\OperationRecord\Jobs\OperationRecordCreateJob;
 use Pharaoh\OperationRecord\Models\OperationRecord as OperationRecordModel;
@@ -87,9 +89,13 @@ class OperationRecordTest extends BaseTestCase
      */
     public function testFind()
     {
-        $this->markTestSkipped();
-
         // Arrange
+        // 建立假的 user table
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id')->comment('PK');
+            $table->string('name');
+        });
+
         $operatorId = 1;
         $subjectId = 2;
         $funcKey = 1104;
