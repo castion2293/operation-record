@@ -38,6 +38,7 @@ class CreateOperationRecordTable extends Migration
 
             $table->index(['operator_id', 'created_at'], 'idx_operation_records_1');
             $table->index(['subject_id', 'created_at'], 'idx_operation_records_2');
+            $table->index(['func_key']);
         });
 
         DB::statement("ALTER TABLE operation_records COMMENT '操作日誌'");

@@ -54,7 +54,11 @@ class OperationRecordScope implements Scope
 
                 $operate = (is_array($operatorId)) ? 'whereIn' : 'where';
 
-                return $builder->$operate('operator_id', $operatorId)->where('operator_type', $operatorType);
+                if (!empty($operatorType)) {
+                    return $builder->$operate('operator_id', $operatorId)->where('operator_type', $operatorType);
+                }
+
+                return $builder->$operate('operator_id', $operatorId);
             }
         );
     }
@@ -74,7 +78,11 @@ class OperationRecordScope implements Scope
 
                 $operate = (is_array($subjectId)) ? 'whereIn' : 'where';
 
-                return $builder->$operate('subject_id', $subjectId)->where('subject_type', $subjectType);
+                if (!empty($subjectType)) {
+                    return $builder->$operate('subject_id', $subjectId)->where('subject_type', $subjectType);
+                }
+
+                return $builder->$operate('subject_id', $subjectId);
             }
         );
     }
