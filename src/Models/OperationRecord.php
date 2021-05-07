@@ -28,6 +28,11 @@ class OperationRecord extends Model
         static::addGlobalScope(new OperationRecordScope);
     }
 
+    public function operatorable()
+    {
+        return $this->morphTo('operator');
+    }
+
     /**
      * 覆寫序列化方法 toArray()時使用
      *

@@ -53,7 +53,7 @@ class OperationRecordService
     public function find(array $attributes = []): array
     {
         try {
-            $operationRecordBuilder = $this->operationRecord->query();
+            $operationRecordBuilder = $this->operationRecord->with('operatorable');
 
             foreach ($attributes as $function => $attribute) {
                 $functionName = Str::of($function)->studly()->prepend('add');
@@ -76,9 +76,11 @@ class OperationRecordService
                         return [
                             'id' => data_get($record, 'id'),
                             'operator_id' => data_get($record, 'operator_id'),
-                            'operator_type' => data_get($record, 'operator_type'),
+//                            'operator_type' => data_get($record, 'operator_type'),
+                            'operator_account' => data_get($record, 'operator.account'),
+                            'operator_name' => data_get($record, 'operator.name'),
                             'subject_id' => data_get($record, 'subject_id'),
-                            'subject_type' => data_get($record, 'subject_type'),
+//                            'subject_type' => data_get($record, 'subject_type'),
                             'func_key' => data_get($record, 'func_key'),
                             'old' => data_get($record, 'old'),
                             'new' => data_get($record, 'new'),

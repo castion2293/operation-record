@@ -87,6 +87,8 @@ class OperationRecordTest extends BaseTestCase
      */
     public function testFind()
     {
+        $this->markTestSkipped();
+
         // Arrange
         $operatorId = 1;
         $subjectId = 2;
