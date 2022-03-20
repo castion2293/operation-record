@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/castion2293/operation-record/compare/v3.0.0...v3.0.1) (2022-03-20)
+
+
+### Bug Fixes
+
+* 修改README.md([@nick](https://github.com/nick)) ([3cff6a9](https://github.com/castion2293/operation-record/commit/3cff6a93fd6756745b17c520459b3b94fb560880))
+
 ## [3.0.0](https://github.com/castion2293/operation-record/compare/v2.0.10...v3.0.0) (2022-03-20)
 
 
