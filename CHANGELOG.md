@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/castion2293/operation-record/compare/v2.0.10...v3.0.0) (2022-03-20)
+
+
+### Features
+
+* 升級至laravel9([@nick](https://github.com/nick)) ([7ecccde](https://github.com/castion2293/operation-record/commit/7ecccde303bcdf87bedd8a8a753d352fb76af657))
+* 升級至laravel9([@nick](https://github.com/nick)) ([9d8049f](https://github.com/castion2293/operation-record/commit/9d8049fda704942fba70de4a4b99670bdf7e0cb0))
+
 ### [2.0.10](https://github.com/castion2293/operation-record/compare/v2.0.9...v2.0.10) (2021-05-07)
 
 
