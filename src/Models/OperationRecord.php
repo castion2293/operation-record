@@ -9,9 +9,8 @@ use Pharaoh\OperationRecord\Scopes\OperationRecordScope;
 
 class OperationRecord extends Model
 {
-    protected $guarded = [];
-
     use HasFactory;
+    protected $guarded = [];
 
     protected $casts = [
         'old' => 'array',
@@ -25,7 +24,7 @@ class OperationRecord extends Model
      */
     protected static function booted()
     {
-        static::addGlobalScope(new OperationRecordScope);
+        static::addGlobalScope(new OperationRecordScope());
     }
 
     public function operatorable()
