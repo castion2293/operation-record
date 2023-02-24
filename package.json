@@ -1,6 +1,6 @@
 {
   "name": "operation-record",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "操作記錄-收集器",
   "main": "index.js",
   "directories": {
